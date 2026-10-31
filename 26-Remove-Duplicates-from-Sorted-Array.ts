@@ -1,14 +1,21 @@
 function removeDuplicates(nums: number[]): number {
-    if (nums.length === 0) return 0;
+    let minNum: number = nums.length > 0 ? Math.min(...nums) : 0; 
+    let maxNum: number = nums.length > 0 ? Math.max(...nums) : 0;
 
-    let slow = 0;
+    let offset: number = -minNum; 
+    let visited: boolean[] = Array(maxNum - minNum + 1).fill(false);
+    let stepBackword: number = 0;
 
-    for (let fast = 1; fast < nums.length; fast++) {
-        if (nums[fast] !== nums[slow]) {
-            slow++;
-            nums[slow] = nums[fast];
+    for(let i = 0; i < nums.length; i++) {
+        if (visited[nums[i] + offset] == true) {
+            stepBackword++; 
+            continue; 
         }
-    }
+       nums[i - stepBackword] = nums[i];
+        visited[nums[i] + offset] = true;
 
-    return slow + 1;
+
+    }
+            return (nums.length - stepBackword)
+
 }
