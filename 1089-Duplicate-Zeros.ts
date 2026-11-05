@@ -1,0 +1,12 @@
+function duplicateZeros(arr: number[]): void {
+    const n = arr.length;
+
+    for (let i = 0; i < n; i++) {
+        if (arr[i] === 0) {
+            arr.splice(i + 1, 0, 0);
+            i++;
+        }
+    }
+
+    arr.length = n;
+}
